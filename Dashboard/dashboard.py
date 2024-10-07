@@ -11,25 +11,25 @@ hour = pd.read_csv('Data/hour.csv')
 st.header('Analisis Korelasi Antar Variable')
 
 heatmap= {
-    'day':'./data/heatmap_day.png',
-    'hour':'./data/heatmap_hour.png'
+    'day':'data/heatmap_day.png',
+    'hour':'data/heatmap_hour.png'
 }
 histogram = {
-    'season':'./data/histogram_musim.png',
-    'yr':'./data/histogram_tahun.png',
-    'mnth':'./data/histogram_bulan.png',
-    'hour':'./data/histogram_jam.png',
-    'holiday':'./data/histogram_holiday.png',
-    'weekday':'./data/histogram_hari.png',
-    'workingday':'./data/histogram_hari.png',
-    'weathersit':'../data/histogram_cuaca.png',
-    'temp':'./data/histogram_suhu_udara.png',
-    'atemp':'./data/histogram_suhu_yg_dirasakan',
-    'hum':'./data/histogram_kelembapan.png',
-    'windspeed':'./data/histogram_kecepatan_angin.png',
-    'casual':'./data/histogram_penyewa_no_membership.png',
-    'registered':'./data/histogram_penyewa_membership.png',
-    'cnt':'./data/histogram_penyewa_sepeda.png'
+    'season':'data/histogram_musim.png',
+    'yr':'data/histogram_tahun.png',
+    'mnth':'data/histogram_bulan.png',
+    'hour':'data/histogram_jam.png',
+    'holiday':'data/histogram_holiday.png',
+    'weekday':'data/histogram_hari.png',
+    'workingday':'data/histogram_hari.png',
+    'weathersit':'data/histogram_cuaca.png',
+    'temp':'data/histogram_suhu_udara.png',
+    'atemp':'data/histogram_suhu_yg_dirasakan',
+    'hum':'data/histogram_kelembapan.png',
+    'windspeed':'data/histogram_kecepatan_angin.png',
+    'casual':'data/histogram_penyewa_no_membership.png',
+    'registered':'data/histogram_penyewa_membership.png',
+    'cnt':'data/histogram_penyewa_sepeda.png'
 }
 
 # Membuat Analisis Heatmap

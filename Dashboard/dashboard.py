@@ -11,9 +11,8 @@ dataset = {
     'hour': './data/hour.csv'
 }
 
-day = pd.read_table(dataset['day'],sep=',')
-hour = pd.read_table(dataset['hour'],delimiter=',')
-
+day = pd.read_csv(dataset['day'])
+hour = pd.read_csv(dataset['hour'])
 st.header('Analisis Korelasi Antar Variable')
 
 heatmap= {

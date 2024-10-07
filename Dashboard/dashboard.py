@@ -74,18 +74,18 @@ st.header('Pertumbuhan Banyaknya Penyewa Sepeda Tiap Tahun')
 col1 , col2 = st.columns(2) #menampilkan 2 kolom dalam 1 baris/line
 
 with col1:
-    st.image('./data/barchart_banyaknya_penyewa_sepeda_pertahun.png')
+    st.image('./Data/barchart_banyaknya_penyewa_sepeda_pertahun.png')
 
 with col2:
-    st.image('./data/barchart_rata2_penyewa_sepeda_pertahun.png')
+    st.image('./Data/barchart_rata2_penyewa_sepeda_pertahun.png')
 
 st.write('')
-st.image('./data/piechart_banyaknya_penyewa_sepeda_pertahun.png')
+st.image('./Data/piechart_banyaknya_penyewa_sepeda_pertahun.png')
 
 st.write('')
 st.write('')
 st.header("Musim Dengan Penyewa Sepeda Terbanyak")
-st.image('./data/piechart_musim_penyewa_sepeda_terbanyak.png')
+st.image('./Data/piechart_musim_penyewa_sepeda_terbanyak.png')
 
 st.write('')
 st.write('')

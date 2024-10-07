@@ -6,13 +6,8 @@ import time
 st.title('Dashboard Analisis Penyewaan Sepeda')
 st.write('')
 
-dataset = {
-    'day' : './data/day.csv',
-    'hour': './data/hour.csv'
-}
-
-day = pd.read_csv(dataset['day'])
-hour = pd.read_csv(dataset['hour'])
+day = pd.read_csv('Data/day.csv')
+hour = pd.read_csv('Data/hour.csv')
 st.header('Analisis Korelasi Antar Variable')
 
 heatmap= {

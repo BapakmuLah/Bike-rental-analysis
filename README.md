@@ -6,7 +6,7 @@ Requirements
 To run this program , u need install following python framework:
 pandas==2.2.2
 numpy==1.26.4
-matplotlib==3.8.4
+matplotlib==3.7.5
 seaborn==0.13.2
 scipy===1.11.4
 pycaret==3.3.2

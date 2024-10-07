@@ -1,0 +1,15 @@
+Overview
+This project focuses on exploring and visualizing data from the bike-sharing-dataset.
+
+Requirements
+
+To run this program , u need install following python framework:
+pandas==2.2.2
+numpy==1.26.4
+matplotlib==3.8.4
+seaborn==0.13.2
+scipy===1.11.4
+pycaret==3.3.2
+statsmodels==0.14.2
+streamlit==1.39.0
+PIL==10.4.0

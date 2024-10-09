@@ -108,7 +108,7 @@ num_rows = st.number_input("Masukkan jumlah sample yg ingin ditampilkan : ",min_
 # JIKA SUDAH MEMILIH SETIDAKNYA 1 KOLOM 
 if selected_columns:
     if choose_dataset == 'day':
-        assert num_rows <= len(day) , "Input melebihi jumlah sample! wkwkwk"  # JIKA INPUT MELEBIHI JUMLAH SAMPLE DAY
+        assert num_rows <= len(day) , "Input melebihi jumlah data! wkwkwk"  # JIKA INPUT MELEBIHI JUMLAH SAMPLE DAY
         st.dataframe(day[selected_columns].head(num_rows)) # MENAMPILKAN DATAFRAME NYA BERDASARKAN KOLOM DAN BANYAKNYA SAMPLE YG DIINPUT
     else:
         assert num_rows <= len(hour) , "Aduh ketinggian inputan nya aowkwok"  # JIKA INPUT MELEBIHI JUMLAH SAMPLE HOUR

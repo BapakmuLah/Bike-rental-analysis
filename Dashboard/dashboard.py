@@ -1,19 +1,17 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from PIL import Image
 import time
+
 st.title('Dashboard Analisis Penyewaan Sepeda')
 st.write('')
 
 day = pd.read_csv('Data/day.csv')
 hour = pd.read_csv('Data/hour.csv')
-st.header('Analisis Korelasi Antar Variable')
+st.header('Korelasi Pearson Antar Variable')
 
-heatmap= {
-    'day':'Data/heatmap_day.png',
-    'hour':'Data/heatmap_hour.png'
-}
 histogram = {
     'season':'Data/histogram_musim.png',
     'yr':'Data/histogram_tahun.png',
@@ -32,10 +30,21 @@ histogram = {
     'cnt':'Data/histogram_penyewa_sepeda.png'
 }
 
-# Membuat Analisis Heatmap
-output_heatmap = st.empty()
+# MEMILIH DATASET
 option_heatmap = st.selectbox('Pilih Heatmap:',['day','hour'])
-output_heatmap.image(heatmap[option_heatmap],caption="Terdapat hubungan cukup kuat antara banyaknya penyewa sepeda dengan faktor-faktor lainnya")
+
+fig , ax = plt.subplots(figsize=(14,8))
+# MEMBUAT HEATMAP DAY
+if option_heatmap == 'day':
+    corr_day = day.drop(columns=['instant','dteday']).corr()
+    sns.heatmap(corr_day,annot=True,cmap='coolwarm')
+    plt.title('Tabel Heatmap Untuk Faktor Penyewa Sepeda Per hari',pad=20)
+    st.pyplot(fig)
+else:  # MEMBUAT HEATMAP HOUR 
+    corr_hour  = hour.drop(['instant','dteday'],axis=1).corr(method='pearson')
+    sns.heatmap(data=corr_hour,annot=True,cmap='coolwarm')
+    plt.title('Tabel Heatmap Untuk Faktor Penyewa Sepeda Setiap Jam',pad=20)
+    st.pyplot(fig)
 
 st.write('')
 
@@ -68,24 +77,55 @@ if tombol == True :
         ax.set_ylabel('Jumlah Penyewa Sepeda')
         line_chart.pyplot(fig)
         st.write('')
+
 #Banyaknya Penyewa Sepeda Tiap Tahun
 st.header('Pertumbuhan Banyaknya Penyewa Sepeda Tiap Tahun')
 
-col1 , col2 = st.columns(2) #menampilkan 2 kolom dalam 1 baris/line
+col1 , col2 = st.columns(2) # MENAMPILKAN 2 KOLOM DALAM 1 BARIS
 
+fig , ax = plt.subplots()
+
+ # MEMVISUALISASIKAN HASIL DARI STREAMLIT LANGSUNG
 with col1:
-    st.image('./Data/barchart_banyaknya_penyewa_sepeda_pertahun.png')
+    jumlah_penyewa_per_tahun = day.groupby('yr')['cnt'].sum().reset_index()
+    sns.barplot(data=jumlah_penyewa_per_tahun,x='yr',y=jumlah_penyewa_per_tahun['cnt'])
+    plt.title('Jumlah Penyewa Sepeda Setiap Tahun')
+    plt.ylabel('Total Penyewa Sepeda')
+    plt.xlabel('Tahun')
+    plt.xticks(ticks=[0,1],labels=['Tahun Pertama','Tahun Kedua'])
+    st.pyplot(fig)
 
 with col2:
-    st.image('./Data/barchart_rata2_penyewa_sepeda_pertahun.png')
+    rata2_penyewa_per_tahun = day.groupby('yr')['cnt'].mean().reset_index()
+    sns.barplot(data=rata2_penyewa_per_tahun,x='yr',y='cnt')
+    plt.title('Rata-rata Penyewa Sepeda Per Tahun')
+    plt.ylabel('Total Penyewa Sepeda')
+    plt.xlabel('Tahun')
+    plt.xticks(ticks=[0,1],labels=['Tahun Pertama','Tahun Kedua'])
+    st.pyplot(fig)
 
 st.write('')
 st.image('./Data/piechart_banyaknya_penyewa_sepeda_pertahun.png')
 
 st.write('')
 st.write('')
+
 st.header("Musim Dengan Penyewa Sepeda Terbanyak")
-st.image('./Data/piechart_musim_penyewa_sepeda_terbanyak.png')
+biggest_season = day.groupby('season')['cnt'].sum().reset_index()
+# MENGUBAH NILAI MUSIM MENJADI NAMA-NAMA MUSIM 
+biggest_season.loc[biggest_season['season'] == 1 , 'season'] = 'Winter Season'
+biggest_season.loc[biggest_season['season'] == 2 , 'season'] = 'Spring Season'
+biggest_season.loc[biggest_season['season'] == 3 , 'season'] = 'Summer Season'
+biggest_season.loc[biggest_season['season'] == 4 , 'season'] = 'Autumn Season'
+
+# MENGUBAH NAMA KOLOM
+biggest_season = biggest_season.rename({'cnt':'Total Penyewa'},axis=1)
+biggest_season   #MENAMPILKANNYA DI DASHBOARD
+
+fig , ax = plt.subplots(ncols=1,nrows=1,figsize=(10,7))
+ax.pie(biggest_season['Total Penyewa'],autopct='%1.1f%%',labels=['Winter','Spring','Summer','Fall'],shadow=True,explode=(0,0,0.1,0))
+ax.set_title('Musim dengan penyewa sepeda terbanyak')
+st.pyplot(fig)
 
 st.write('')
 st.write('')
